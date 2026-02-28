@@ -22,16 +22,14 @@ class PlanStop:
 
 
 def _score(a: Attraction, prefs: UserPrefs, travel_min: float) -> float:
-    """
-    Simple normalized scoring for PoC.
-    Higher rating + more tag matches, penalize travel time and cost.
-    """
+    # Score attractions based on rating, tags, travel time, and cost
     tag_bonus = len(a.tags.intersection(prefs.desired_tags))
     return (a.rating * 2.0) + (tag_bonus * 1.5) - (travel_min / 15.0) - (a.cost / 20.0)
 
 
 class WanderWiseEngine:
     def __init__(self, attractions: List[Attraction]) -> None:
+        # Initialize the itinerary engine with attractions and build indices
         self.attractions_by_id: Dict[str, Attraction] = {a.id: a for a in attractions}
 
         self.tag_index = TagIndex()
@@ -44,7 +42,7 @@ class WanderWiseEngine:
         self.graph.build_knn(attractions, k=6)
 
     def build_day_plan(self, prefs: UserPrefs, start_latlon: Tuple[float, float]) -> List[PlanStop]:
-        # Tag filtering (AND). If empty result, fall back to all.
+        # Generate optimized day itinerary based on user preferences and constraints
         eligible = self.tag_index.filter_all(prefs.desired_tags)
         if not eligible:
             eligible = set(self.attractions_by_id.keys())

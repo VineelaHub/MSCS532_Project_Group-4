@@ -7,16 +7,18 @@ class TagIndex:
     """Inverted index: tag -> set(attraction_id)."""
 
     def __init__(self) -> None:
+        # Initialize empty inverted index
         self.inv: Dict[str, Set[str]] = {}
 
     def build(self, attractions: Iterable[Attraction]) -> None:
+        # Build inverted index mapping tags to attraction IDs
         self.inv.clear()
         for a in attractions:
             for t in a.tags:
                 self.inv.setdefault(t, set()).add(a.id)
 
     def filter_all(self, tags: Iterable[str]) -> Set[str]:
-        """AND query: intersection of posting lists."""
+        # Find attractions matching ALL specified tags (AND query)
         tags = list(tags)
         if not tags:
             return set()

@@ -9,7 +9,7 @@ from .itinerary import WanderWiseEngine
 output = []
 
 def log(msg=""):
-    """Log message to both console and file."""
+    # Log message to console and output list
     output.append(msg)
     print(msg)
 

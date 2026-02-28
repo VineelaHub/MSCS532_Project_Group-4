@@ -16,13 +16,16 @@ class KDTree:
     """2D KD-tree for radius queries over (lat, lon)."""
 
     def __init__(self) -> None:
+        # Initialize empty KD-tree
         self.root: Optional[_Node] = None
 
     def build(self, items: List[Attraction]) -> None:
+        # Build balanced KD-tree from attractions
         pts = items[:]
         self.root = self._build(pts, 0)
 
     def _build(self, pts: List[Attraction], depth: int) -> Optional[_Node]:
+        # Recursively build balanced tree using median partitioning
         if not pts:
             return None
         axis = depth % 2
@@ -36,11 +39,13 @@ class KDTree:
         )
 
     def radius_search(self, center: Tuple[float, float], r_km: float) -> List[Attraction]:
+        # Find all attractions within a given radius from center point
         out: List[Attraction] = []
         self._rad(self.root, center, r_km, out)
         return out
 
     def _rad(self, node: Optional[_Node], center: Tuple[float, float], r_km: float, out: List[Attraction]) -> None:
+        # Recursively search tree and prune branches outside radius
         if node is None:
             return
 

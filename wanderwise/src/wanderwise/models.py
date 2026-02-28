@@ -29,7 +29,7 @@ class UserPrefs:
 
 
 def haversine_km(a: Tuple[float, float], b: Tuple[float, float]) -> float:
-    """Great-circle distance in km (good enough for PoC)."""
+    # Calculate great-circle distance between two geographic coordinates
     lat1, lon1 = a
     lat2, lon2 = b
     r = 6371.0

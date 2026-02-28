@@ -15,9 +15,11 @@ class TravelGraph:
     """
 
     def __init__(self) -> None:
+        # Initialize empty adjacency list for the graph
         self.adj: Dict[str, List[Tuple[str, float]]] = {}
 
     def build_knn(self, items: List[Attraction], k: int = 6, minutes_per_km: float = 12.0) -> None:
+        # Build k-nearest neighbors graph with travel time weights
         self.adj.clear()
         for a in items:
             dists: List[Tuple[float, str]] = []
@@ -31,6 +33,7 @@ class TravelGraph:
             self.adj[a.id] = [(bid, dist * minutes_per_km) for dist, bid in neighbors]
 
     def shortest_time(self, src: str, dst: str) -> float:
+        # Find shortest travel time between two attractions using Dijkstra's algorithm
         if src == dst:
             return 0.0
 

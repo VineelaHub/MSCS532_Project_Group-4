@@ -4,15 +4,17 @@ from .itinerary import WanderWiseEngine
 
 
 def mm(h: int, m: int) -> int:
+    # Convert hours and minutes to total minutes from midnight
     return h * 60 + m
 
 
 def fmt(t: int) -> str:
+    # Format minutes as HH:MM time string
     return f"{t//60:02d}:{t%60:02d}"
 
 
 def main() -> None:
-    # San Francisco-style mini dataset (PoC)
+    # Generate a day itinerary for San Francisco attractions
     attractions = [
         Attraction(
             id="ggb",

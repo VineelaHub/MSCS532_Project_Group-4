@@ -24,14 +24,17 @@ class IntervalTree:
     """
 
     def __init__(self) -> None:
+        # Initialize empty interval tree
         self.root: Optional[_INode] = None
 
     def insert(self, lo: int, hi: int) -> None:
+        # Insert interval into tree
         if hi <= lo:
             raise ValueError("Invalid interval: hi must be > lo")
         self.root = self._ins(self.root, lo, hi)
 
     def _ins(self, node: Optional[_INode], lo: int, hi: int) -> _INode:
+        # Recursively insert and update subtree max_hi values
         if node is None:
             return _INode(lo=lo, hi=hi, max_hi=hi)
 
@@ -44,11 +47,13 @@ class IntervalTree:
         return node
 
     def has_overlap(self, lo: int, hi: int) -> bool:
+        # Check if query interval overlaps with any stored interval
         if hi <= lo:
             return False
         return self._has(self.root, (lo, hi))
 
     def _has(self, node: Optional[_INode], it: Tuple[int, int]) -> bool:
+        # Recursively search tree using max_hi pruning for overlap detection
         if node is None:
             return False
 
