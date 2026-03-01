@@ -35,7 +35,7 @@ Does [500-600] overlap? False
 6. ITINERARY ENGINE - Generate daily itineraries
 ------------------------------------------------------------
 User preferences:
-  Tags: ['park', 'museum']
+  Tags: ['museum', 'park']
   Budget: $100
   Hours: 10:00 - 17:00
 

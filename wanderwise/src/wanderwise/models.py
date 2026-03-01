@@ -29,10 +29,10 @@ class UserPrefs:
 
 
 def haversine_km(a: Tuple[float, float], b: Tuple[float, float]) -> float:
-    # Calculate great-circle distance between two geographic coordinates
+    """Calculate distance between two geographic points (lat, lon) in km."""
     lat1, lon1 = a
     lat2, lon2 = b
-    r = 6371.0
+    r = 6371.0  # Earth's radius in km
     p1 = math.radians(lat1)
     p2 = math.radians(lat2)
     dlat = math.radians(lat2 - lat1)

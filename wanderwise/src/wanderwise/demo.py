@@ -4,12 +4,12 @@ from .itinerary import WanderWiseEngine
 
 
 def mm(h: int, m: int) -> int:
-    # Convert hours and minutes to total minutes from midnight
+    """Convert hours:minutes to minutes from midnight."""
     return h * 60 + m
 
 
 def fmt(t: int) -> str:
-    # Format minutes as HH:MM time string
+    """Format minutes as HH:MM."""
     return f"{t//60:02d}:{t%60:02d}"
 
 

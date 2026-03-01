@@ -20,12 +20,12 @@ class KDTree:
         self.root: Optional[_Node] = None
 
     def build(self, items: List[Attraction]) -> None:
-        # Build balanced KD-tree from attractions
+        """Build balanced 2D K-D tree for spatial queries."""
         pts = items[:]
         self.root = self._build(pts, 0)
 
     def _build(self, pts: List[Attraction], depth: int) -> Optional[_Node]:
-        # Recursively build balanced tree using median partitioning
+        """Recursively partition points using median split."""
         if not pts:
             return None
         axis = depth % 2
@@ -39,13 +39,13 @@ class KDTree:
         )
 
     def radius_search(self, center: Tuple[float, float], r_km: float) -> List[Attraction]:
-        # Find all attractions within a given radius from center point
+        """Return all attractions within r_km of center point."""
         out: List[Attraction] = []
         self._rad(self.root, center, r_km, out)
         return out
 
     def _rad(self, node: Optional[_Node], center: Tuple[float, float], r_km: float, out: List[Attraction]) -> None:
-        # Recursively search tree and prune branches outside radius
+        """Recursively search with spatial pruning."""
         if node is None:
             return
 

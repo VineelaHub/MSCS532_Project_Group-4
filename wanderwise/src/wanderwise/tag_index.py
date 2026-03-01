@@ -11,14 +11,14 @@ class TagIndex:
         self.inv: Dict[str, Set[str]] = {}
 
     def build(self, attractions: Iterable[Attraction]) -> None:
-        # Build inverted index mapping tags to attraction IDs
+        """Build inverted index: tag -> {attraction_ids}."""
         self.inv.clear()
         for a in attractions:
             for t in a.tags:
                 self.inv.setdefault(t, set()).add(a.id)
 
     def filter_all(self, tags: Iterable[str]) -> Set[str]:
-        # Find attractions matching ALL specified tags (AND query)
+        """Return attractions matching ALL tags (intersection)."""
         tags = list(tags)
         if not tags:
             return set()

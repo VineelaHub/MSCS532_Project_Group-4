@@ -1,26 +1,27 @@
 from __future__ import annotations
 from typing import Dict, List, Tuple
 import heapq
-
-try:
-    from models import Attraction, haversine_km
-except ModuleNotFoundError:
-    from .models import Attraction, haversine_km
+from .models import Attraction, haversine_km
+from functools import lru_cache
 
 
 class TravelGraph:
     """
     Sparse weighted graph (kNN) + Dijkstra shortest path.
     Edge weights represent approximate travel minutes.
+
+    Phase 3 upgrade:
+    - Added LRU caching for shortest_time() to avoid repeated Dijkstra calls.
     """
 
     def __init__(self) -> None:
-        # Initialize empty adjacency list for the graph
         self.adj: Dict[str, List[Tuple[str, float]]] = {}
 
     def build_knn(self, items: List[Attraction], k: int = 6, minutes_per_km: float = 12.0) -> None:
-        # Build k-nearest neighbors graph with travel time weights
+        """Build k-NN graph with travel time edge weights."""
         self.adj.clear()
+        self.shortest_time.cache_clear()  # Clear cache when graph changes
+
         for a in items:
             dists: List[Tuple[float, str]] = []
             for b in items:
@@ -32,8 +33,8 @@ class TravelGraph:
             neighbors = dists[:k]
             self.adj[a.id] = [(bid, dist * minutes_per_km) for dist, bid in neighbors]
 
-    def shortest_time(self, src: str, dst: str) -> float:
-        # Find shortest travel time between two attractions using Dijkstra's algorithm
+    def _shortest_time_dijkstra(self, src: str, dst: str) -> float:
+        """Dijkstra's algorithm for shortest path."""
         if src == dst:
             return 0.0
 
@@ -53,3 +54,8 @@ class TravelGraph:
                     heapq.heappush(pq, (nd, v))
 
         return float("inf")
+
+    @lru_cache(maxsize=5000)
+    def shortest_time(self, src: str, dst: str) -> float:
+        """Get shortest travel time (cached) between attractions."""
+        return self._shortest_time_dijkstra(src, dst)
