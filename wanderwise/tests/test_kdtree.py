@@ -1,5 +1,5 @@
-from src.models import Attraction
-from src.spatial_kdtree import KDTree
+from wanderwise.models import Attraction
+from wanderwise.spatial_kdtree import KDTree
 
 def test_radius_search():
     # Points near (0,0) and far away

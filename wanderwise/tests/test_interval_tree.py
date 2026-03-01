@@ -1,4 +1,4 @@
-from src.interval_tree import IntervalTree
+from wanderwise.interval_tree import IntervalTree
 
 def test_overlap_detection():
     t = IntervalTree()

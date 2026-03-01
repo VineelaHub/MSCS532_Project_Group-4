@@ -1,5 +1,5 @@
-from src.models import Attraction
-from src.tag_index import TagIndex
+from wanderwise.models import Attraction
+from wanderwise.tag_index import TagIndex
 
 def test_filter_all():
     a1 = Attraction("1","A",0,0,frozenset({"museum","art"}),0,5,0,1000,60)

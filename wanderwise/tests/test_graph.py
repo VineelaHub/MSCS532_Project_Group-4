@@ -1,5 +1,5 @@
-from src.models import Attraction
-from src.graph import TravelGraph
+from wanderwise.models import Attraction
+from wanderwise.graph import TravelGraph
 
 def test_shortest_time_basic():
     a = Attraction("a","A",0,0,frozenset({"x"}),0,5,0,1000,10)

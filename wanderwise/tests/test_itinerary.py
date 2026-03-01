@@ -1,5 +1,5 @@
-from src.models import Attraction, UserPrefs
-from src.itinerary import WanderWiseEngine
+from wanderwise.models import Attraction, UserPrefs
+from wanderwise.itinerary import WanderWiseEngine
 
 def mm(h,m): return h*60+m
 
