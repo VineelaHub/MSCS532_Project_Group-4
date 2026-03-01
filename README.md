@@ -11,30 +11,6 @@ WanderWise solves the tourist itinerary problem by:
 - **Score-based optimization** considering ratings, travel time, costs, and tag matches
 - **Route planning** using graph algorithms to minimize travel between attractions
 
-## 🏗️ Project Structure
-
-```
-wanderwise/
-├── src/wanderwise/           # Main package code
-│   ├── models.py             # Data models (Attraction, UserPrefs, scoring)
-│   ├── itinerary.py          # WanderWiseEngine for building day plans
-│   ├── tag_index.py          # Tag-based filtering index
-│   ├── spatial_kdtree.py      # K-D tree for spatial queries
-│   ├── interval_tree.py       # Interval tree for time constraint management
-│   ├── graph.py              # Travel graph and routing algorithms
-│   ├── demo.py               # Example: San Francisco itinerary
-│   ├── benchmark.py          # Performance benchmarking suite
-│   ├── dataset_generator.py   # Synthetic data generation
-│   └── save_output.py        # Output formatting utilities
-├── tests/                    # Test suite
-│   ├── test_graph.py         # Graph algorithm tests
-│   ├── test_interval_tree.py # Interval tree tests
-│   ├── test_itinerary.py     # Itinerary engine tests
-│   ├── test_kdtree.py        # K-D tree tests
-│   └── test_tag_index.py     # Tag index tests
-└── requirements.txt          # Dependencies
-```
-
 ## 🔑 Key Components
 
 ### Core Data Structures
